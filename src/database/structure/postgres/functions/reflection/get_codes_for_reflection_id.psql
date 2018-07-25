@@ -1,0 +1,18 @@
+CREATE OR REPLACE FUNCTION get_codes_for_reflection_id(
+    p_reflection_id UUID
+)
+RETURNS TABLE(reflection_id UUID,
+              native_code TEXT,
+              foreign_code TEXT)
+AS
+$BODY$
+  BEGIN
+    RETURN QUERY
+    SELECT r.reflection_id, native_lang.code, foreign_lang.code
+    FROM reflection r
+    JOIN languages native_lang ON r.native_language_id = native_lang.language_id
+    JOIN languages foreign_lang ON r.foreign_language_id = foreign_lang.language_id
+    WHERE r.reflection_id = p_reflection_id;
+  END;
+$BODY$
+LANGUAGE plpgsql VOLATILE;

@@ -6,7 +6,7 @@ from aiohttp import web
 
 from translator_api.application import Application
 
-logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger('aiohttp').setLevel(logging.ERROR)
 
 app = web.Application()
 

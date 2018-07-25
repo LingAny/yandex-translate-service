@@ -1,4 +1,4 @@
-reflection_id:uuid,title:text,native_language_id:uuid,foreign_language_id:uuid
+reflection_id:uuid,native_language_id:uuid,foreign_language_id:uuid
 
 -- reflection_Deutsche_to_many
 dcd7df63c0464f819524bfb5f8eee447,ee7f2eb8f0ed4a4b9687e2135400ca2b,87f347f2f626453c987782d74eeb43ce
