@@ -2,8 +2,8 @@ from aiohttp.web_app import Application as WebApplication
 from aiohttp.web_urldispatcher import RouteTableDef
 from injector import inject, singleton
 
-from yandex_translator.ioc import ioc
-from yandex_translator.routes import TranslateRoute
+from translator_api.ioc import ioc
+from translator_api.routes import TranslateRoute
 
 
 class Application(object):

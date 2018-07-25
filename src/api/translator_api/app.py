@@ -4,7 +4,7 @@ import uvloop
 
 from aiohttp import web
 
-from yandex_translator.application import Application
+from translator_api.application import Application
 
 logging.getLogger().setLevel(logging.DEBUG)
 

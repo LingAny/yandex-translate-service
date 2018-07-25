@@ -1,5 +1,5 @@
 from injector import Injector
 
-from yandex_translator.configuration import Configuration
+from translator_api.configuration import Configuration
 
 ioc = Injector([Configuration()])
