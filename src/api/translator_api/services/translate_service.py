@@ -4,8 +4,6 @@ import aiohttp
 from typing import Optional, Dict, Any, Tuple
 from uuid import UUID
 
-import requests
-from flask import json
 from injector import inject, singleton
 
 from translator_api.entities import WordDTO

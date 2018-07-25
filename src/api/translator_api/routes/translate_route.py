@@ -4,7 +4,6 @@ from uuid import UUID
 
 from aiohttp.http_exceptions import HttpBadRequest
 from aiohttp.web_response import Response
-from aiohttp.web_urldispatcher import RouteTableDef
 from injector import inject, singleton
 
 from translator_api.services import TranslateService
@@ -20,7 +19,7 @@ class TranslateRoute(object):
             "hello": "hello"
         }
 
-    def register_routes(self, routes: RouteTableDef) -> None:
+    def register_routes(self, routes) -> None:
 
         @routes.get('/text/{text}/{ref_id}')
         async def _get_translation_by_text(request) -> Response:

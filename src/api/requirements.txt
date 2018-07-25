@@ -1,0 +1,7 @@
+gunicorn
+injector
+asyncpg
+aiohttp
+ujson
+uvloop
+aiocache

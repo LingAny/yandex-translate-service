@@ -17,5 +17,21 @@ services:
       - backend
     env_file: .env
 
+  api:
+    build:
+      context: ../src/api
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../src/api/translator_api:/tmp/api/translator_api
+    env_file: .env
+    environment:
+      - PYTHONPATH=/tmp/api/
+      - WEB_PORT=8080
+
 networks:
+  frontend:
   backend:
