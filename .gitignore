@@ -1,0 +1,13 @@
+deploy/.vagrant
+.idea
+*.db
+.DS_Store
+venv
+env
+__pycache__
+blog_old.md
+src/api/rt_plan_api.egg-info
+src/api/build
+src/api/dist
+.mypy_cache
+.vscode
