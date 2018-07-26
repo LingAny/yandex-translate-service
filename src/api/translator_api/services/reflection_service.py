@@ -1,7 +1,7 @@
-import logging
 from uuid import UUID
 
 from aiocache import cached
+from aiocache.serializers import PickleSerializer
 from injector import singleton, inject
 from typing import Optional
 
@@ -16,8 +16,7 @@ class ReflectionService(object):
     def __init__(self, repo: ReflectionRepository) -> None:
         self._repo = repo
 
-    @cached(key="get_codes_for_reflection")
+    @cached(key="get_codes_for_reflection", serializer=PickleSerializer())
     async def get_codes_for_reflection(self, reflection_id: UUID) -> Optional[RefCodesDTO]:
         entity = await self._repo.get_codes_for_reflection(reflection_id)
-        logging.error('get_codes_for_reflection')
         return entity

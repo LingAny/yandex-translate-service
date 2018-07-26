@@ -1,4 +1,6 @@
 from .async_data_context import AsyncDataContext
 from .async_data_context_factory import AsyncDataContextFactory
 from .async_postgres_data_context import AsyncPostgresDataContext
+from .async_pool_postgres_data_context import AsyncPoolPostgresDataContext
 from .env_async_pg_data_context_factory import EnvAsyncPostgresDataContextFactory
+from .env_async_pool_pg_data_context_factory import EnvAsyncPoolPostgresDataContextFactory

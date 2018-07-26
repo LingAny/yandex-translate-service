@@ -5,3 +5,6 @@ aiohttp
 ujson
 uvloop
 aiocache
+aiodns
+cchardet
+msgpack

@@ -24,13 +24,13 @@ services:
       - backend
       - frontend
     ports:
-      - "8080:8080"
+      - "9090:9090"
     volumes:
       - ../src/api/translator_api:/tmp/api/translator_api
     env_file: .env
     environment:
       - PYTHONPATH=/tmp/api/
-      - WEB_PORT=8080
+      - WEB_PORT=9090
 
 networks:
   frontend:
