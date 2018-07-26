@@ -52,9 +52,10 @@ class TranslateService(object):
     async def _translate_text(self, text, native_language="en", foreign_language="ru") -> Optional[str]:
         parameter = Params(self._key, native_language, foreign_language)
         params, data = parameter.post_params(text)
-        response = requests.post(self._host, params=params, data=data)
-        data = json.loads(response.text)
-        return None if len(data) == 0 else data.get('text')[0]
+        async with aiohttp.ClientSession() as session:
+            async with session.post(self._host, params=params, data=data, ssl=False, proxy="http://10.100.122.141:3128") as resp:
+                data = await resp.json(loads=ujson.loads)
+                return None if len(data) == 0 else data.get('text')[0]
 
     @staticmethod
     def _check_if_word_of_phrase(text: str) -> bool:

@@ -3,6 +3,7 @@ import ujson
 from uuid import UUID
 
 from aiohttp.http_exceptions import HttpBadRequest
+from aiohttp.web_request import Request
 from aiohttp.web_response import Response
 from injector import inject, singleton
 
@@ -37,8 +38,45 @@ class TranslateRoute(object):
                 return Response(status=200, body=ujson.dumps(body))
             except BaseException:
                 raise HttpBadRequest(message='bad request')
-        #
-        # @routes.get('/translation/{translation}/{ref_id}')
-        # async def _get_text_by_translation(translation: str, ref_id: str):
-        #     logging.info(f"translation: {translation}: ref_id: {ref_id}")
-        #     return Response(text="Hello, world")
+
+        @routes.post('/text/')
+        async def _get_translation(request: Request) -> Response:
+            """
+            text на том языке, который изучаем
+            """
+            try:
+                data = await request.json(loads=ujson.loads)
+                text = data['data']
+                ref_id = data['reflectionId']
+                word = await self._service.get_translation_by_text(text=text, reflection_id=UUID(ref_id))
+                if not word:
+                    return Response(text="no word", status=404)
+                body = {
+                    'text': word.text,
+                    'translation': word.translation
+                }
+                # logging.error(f"translation: {word.translation}")
+                return Response(status=200, body=ujson.dumps(body))
+            except BaseException:
+                raise HttpBadRequest(message='bad request')
+
+        @routes.post('/translation/')
+        async def _get_text(request: Request) -> Response:
+            """
+            translation на том языке, на котором изучаем
+            """
+            try:
+                data = await request.json(loads=ujson.loads)
+                translation = data['data']
+                ref_id = data['reflectionId']
+                word = await self._service.get_text_by_translation(translation=translation, reflection_id=UUID(ref_id))
+                if not word:
+                    return Response(text="no word", status=404)
+                body = {
+                    'text': word.text,
+                    'translation': word.translation
+                }
+                # logging.error(f"text: {word.text}")
+                return Response(status=200, body=ujson.dumps(body))
+            except BaseException:
+                raise HttpBadRequest(message='bad request')
