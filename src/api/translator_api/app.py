@@ -13,5 +13,7 @@ app = web.Application()
 application = Application()
 application.register(app)
 
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
 if __name__ == '__main__':
     web.run_app(app)

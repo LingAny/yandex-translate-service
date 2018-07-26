@@ -19,4 +19,4 @@ ENV DB_PASS translator
 ENV DB_PORT 5432
 ENV WEB_PORT 80
 
-CMD /usr/local/bin/gunicorn --worker-connections 1024 --worker-class aiohttp.GunicornWebWorker -b :$WEB_PORT --reload main:app
+CMD /usr/local/bin/gunicorn -w 4 --worker-connections 1024 --worker-class aiohttp.GunicornWebWorker -b :$WEB_PORT --reload main:app

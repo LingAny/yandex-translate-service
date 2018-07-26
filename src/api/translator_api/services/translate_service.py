@@ -7,21 +7,20 @@ from uuid import UUID
 from injector import inject, singleton
 
 from translator_api.entities import WordDTO
-from translator_api.services import ReflectionService
+from translator_api.services import ReflectionInMemoryService
 
 
 @singleton
 class TranslateService(object):
 
     @inject
-    def __init__(self, reflection_service: ReflectionService) -> None:
+    def __init__(self, reflection_service: ReflectionInMemoryService) -> None:
         self._reflection_service = reflection_service
         self._host = 'https://translate.yandex.net/api/v1.5/tr.json/translate'
         self._key = 'trnsl.1.1.20180319T065216Z.ef55a2768a010315.6ad80367b78fed4fc538c3de84288d98d5553e91'
 
     async def get_translation_by_text(self, text: str, reflection_id: UUID) -> Optional[WordDTO]:
 
-        # need to get data from the web
         codes = await self._reflection_service.get_codes_for_reflection(reflection_id)
         if not codes:
             return None
